@@ -117,33 +117,11 @@ PATH=$PATH:$BUILD_DIR/vendor/node/bin:$BUILD_DIR/node_modules/.bin:$BUILD_DIR/no
 export NODE_PATH="$BUILD_DIR/node_modules:$NODE_PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/vendor/gdal/lib:$BUILD_DIR/vendor/proj/lib:$LD_LIBRARY_PATH"
 
-if [ -f $BUILD_DIR/project.yml ]; then
-  echo "-----> Pre-processing map style"
-
-  js-yaml --to-json $BUILD_DIR/project.yml > $BUILD_DIR/project.mml
-fi
-
-if [ -f $BUILD_DIR/project.mml ]; then
-  echo "-----> Compiling map style"
-
-  millstone -n $BUILD_DIR/project.mml 2>&1 > $BUILD_DIR/project2.mml | indent
-  carto -n $BUILD_DIR/project2.mml 2>&1 > $BUILD_DIR/stylesheet.xml | indent
-  rm $BUILD_DIR/project2.mml
-
-  sed -i 's%/tmp/millstone-test%/app/map/layers%g' $BUILD_DIR/stylesheet.xml
-
-  if [ -d /tmp/millstone-test ]; then
-    mkdir -p $BUILD_DIR/layers
-    mv /tmp/millstone-test/* $BUILD_DIR/layers/
-  fi
-fi
-
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 
 cat <<EOF > $BUILD_DIR/.profile.d/map.sh
 export NODE_ENV=production
-export UV_THREADPOOL_SIZE=16
 EOF
 
 echo "-----> Cleaning up"
