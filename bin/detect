@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-if [ -f $1/stylesheet.xml ]; then
-  echo "Mapnik" && exit 0
-elif [ -f $1/project.mml ]; then
-  echo "Carto" && exit 0
-elif [ -f $1/project.yml ]; then
-  echo "Carto/YAML" && exit 0
+if [ -f $1/project.yml ]; then
+  echo "TileMill 2" && exit 0
 else
   echo "no" && exit 1
 fi

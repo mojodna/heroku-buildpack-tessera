@@ -4,6 +4,5 @@
 cat << EOF
 ---
 default_process_types:
-  web: tileserver
-  worker: seeder
+  web: vector-tile-server
 EOF
