@@ -48,7 +48,7 @@ cat <<EOF > $BUILD_DIR/package.json
     "node": "~0.10.20"
   },
   "dependencies": {
-    "tessera": "*"
+    "tessera": "~0.0.1"
   }
 }
 EOF
