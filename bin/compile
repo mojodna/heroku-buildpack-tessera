@@ -57,7 +57,7 @@ if [ ! -e $BUILD_DIR/README.md ]; then
   echo . > $BUILD_DIR/README.md
 fi
 
-BUILDPACKS="https://bitbucket.org/mojodna/heroku-buildpack-mapnik-deps.git#${MAPNIK_VARIANT} \
+BUILDPACKS="https://github.com/mojodna/heroku-buildpack-mapnik.git#${MAPNIK_VARIANT} \
             https://github.com/heroku/heroku-buildpack-nodejs.git"
 
 for BUILDPACK in $BUILDPACKS; do
