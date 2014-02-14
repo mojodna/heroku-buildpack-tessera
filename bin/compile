@@ -45,7 +45,7 @@ cat <<EOF > $BUILD_DIR/package.json
   "description": "Map",
   "repository": "n/a",
   "engines": {
-    "node": "~0.10.20"
+    "node": "~0.10.25"
   },
   "dependencies": {
     "tessera": "~0.0.2"
