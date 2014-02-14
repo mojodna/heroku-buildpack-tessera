@@ -58,6 +58,7 @@ if [ ! -e $BUILD_DIR/README.md ]; then
 fi
 
 if [ "$CLEAR_CACHE" != "" ]; then
+  echo "-----> Clearing the cache"
   rm -rf $CACHE_DIR
 fi
 
