@@ -57,6 +57,10 @@ if [ ! -e $BUILD_DIR/README.md ]; then
   echo . > $BUILD_DIR/README.md
 fi
 
+if [ "$CLEAR_CACHE" != "" ]; then
+  rm -rf $CACHE_DIR
+fi
+
 BUILDPACKS="https://github.com/mojodna/heroku-buildpack-mapnik.git#${MAPNIK_VARIANT} \
             https://github.com/heroku/heroku-buildpack-nodejs.git"
 
