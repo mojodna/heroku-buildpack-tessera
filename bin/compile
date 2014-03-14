@@ -14,6 +14,7 @@ unset GIT_DIR
 # parse and derive params
 BUILD_DIR=$1
 CACHE_DIR=$2
+ENV_DIR=$3
 BUILDPACK_DIR=$(cd $(dirname $0)/..; pwd)
 
 MAPNIK_VARIANT=${MAPNIK_VARIANT:-master}
@@ -35,6 +36,24 @@ function indent() {
     *)      sed -u "$c";;
   esac
 }
+
+export_env_dir() {
+  env_dir=$1
+  whitelist_regex=${2:-''}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+  if [ -d "$env_dir" ]; then
+    for e in $(ls $env_dir); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $env_dir/$e)"
+      :
+    done
+  fi
+}
+
+if [ -d "$ENV_DIR" ]; then
+  echo "-----> Exporting config vars to environment"
+  export_env_dir $ENV_DIR
+fi
 
 echo
 echo "-----> Installing Dependencies"
@@ -98,7 +117,7 @@ for BUILDPACK in $BUILDPACKS; do
 
     if [ $? == 0 ]; then
       echo "=====> Detected Framework: $framework"
-      $dir/bin/compile $1 $2
+      $dir/bin/compile $1 $2 $3
 
       if [ $? != 0 ]; then
         exit 1
