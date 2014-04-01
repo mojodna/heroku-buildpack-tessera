@@ -17,8 +17,6 @@ CACHE_DIR=$2
 ENV_DIR=$3
 BUILDPACK_DIR=$(cd $(dirname $0)/..; pwd)
 
-MAPNIK_VARIANT=${MAPNIK_VARIANT:-master}
-
 PATH=$PATH:$BUILD_DIR/vendor/node/bin
 
 # include .files when moving things around
@@ -81,7 +79,7 @@ if [ "$CLEAR_CACHE" != "" ]; then
   rm -rf $CACHE_DIR
 fi
 
-BUILDPACKS="https://github.com/mojodna/heroku-buildpack-mapnik.git#${MAPNIK_VARIANT} \
+BUILDPACKS="https://github.com/mojodna/heroku-buildpack-mapnik.git#${MAPNIK_VARIANT:-master} \
             https://github.com/heroku/heroku-buildpack-nodejs.git"
 
 for BUILDPACK in $BUILDPACKS; do
