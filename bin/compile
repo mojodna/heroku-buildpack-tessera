@@ -133,10 +133,9 @@ for BUILDPACK in $BUILDPACKS; do
   fi
 done
 
-# TODO fully necessary?
+# add Node modules and binaries to the environment (for subsequent build steps)
 PATH=$PATH:$BUILD_DIR/vendor/node/bin:$BUILD_DIR/node_modules/.bin:$BUILD_DIR/node_modules/tessera/node_modules/.bin
 export NODE_PATH="$BUILD_DIR/node_modules:$NODE_PATH"
-export LD_LIBRARY_PATH="$BUILD_DIR/vendor/gdal/lib:$BUILD_DIR/vendor/proj/lib:$LD_LIBRARY_PATH"
 
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
