@@ -115,7 +115,7 @@ for BUILDPACK in $BUILDPACKS; do
 
     if [ $? == 0 ]; then
       echo "=====> Detected Framework: $framework"
-      $dir/bin/compile $1 $2 $3
+      eval $dir/bin/compile $@
 
       if [ $? != 0 ]; then
         exit 1
