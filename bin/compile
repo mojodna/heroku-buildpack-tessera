@@ -65,7 +65,7 @@ cat <<EOF > $BUILD_DIR/package.json
     "node": "~0.10.25"
   },
   "dependencies": {
-    "tessera": "git+https://github.com/mojodna/tessera.git"
+    "tessera": "^0.2.0"
   }
 }
 EOF
